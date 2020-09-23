@@ -1,5 +1,6 @@
 lt\verbus\vismawarehouse01\model\Product.class
 lt\verbus\vismawarehouse01\repository\ProductRepository.class
+lt\verbus\vismawarehouse01\services\ProductService.class
 lt\verbus\vismawarehouse01\exeption\GlobalExceptionHandler.class
 lt\verbus\vismawarehouse01\exeption\ErrorResponse.class
 lt\verbus\vismawarehouse01\controller\ProductController.class
