@@ -1,8 +1,0 @@
-lt\verbus\vismawarehouse01\model\Product.class
-lt\verbus\vismawarehouse01\repository\ProductRepository.class
-lt\verbus\vismawarehouse01\services\ProductService.class
-lt\verbus\vismawarehouse01\exception\GlobalExceptionHandler.class
-lt\verbus\vismawarehouse01\exception\ResourceNotFoundException.class
-lt\verbus\vismawarehouse01\controller\ProductController.class
-lt\verbus\vismawarehouse01\VismaWarehouse01Application.class
-lt\verbus\vismawarehouse01\exception\ErrorResponse.class
