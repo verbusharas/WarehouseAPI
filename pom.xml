@@ -14,7 +14,7 @@
     <artifactId>visma-warehouse-01</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>visma-warehouse-01</name>
-    <description>Demo project for Spring Boot</description>
+    <description>uuu yyy</description>
 
     <properties>
         <java.version>11</java.version>
@@ -57,23 +57,10 @@
         </dependency>
 
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.4.6</version>
         </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-ui</artifactId>-->
-<!--            <version>1.4.6</version>-->
-<!--        </dependency>-->
-
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
