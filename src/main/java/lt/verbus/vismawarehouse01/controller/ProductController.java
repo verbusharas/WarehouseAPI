@@ -1,11 +1,13 @@
 package lt.verbus.vismawarehouse01.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lt.verbus.vismawarehouse01.config.SwaggerConfig;
 import lt.verbus.vismawarehouse01.exeption.ResourceNotFoundException;
 import lt.verbus.vismawarehouse01.model.Product;
 import lt.verbus.vismawarehouse01.repository.ProductRepository;
 import lt.verbus.vismawarehouse01.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/api")
+@Api(tags = { SwaggerConfig.TAG_1 })
 public class ProductController {
 
     @Autowired
@@ -24,11 +28,11 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @ApiOperation(value = "This will provide a list of all products in the warehouse.", notes = "Some other notes about the API. ...")
     @GetMapping("/products")
     public List<Product> getAllProducts() {
         return productService.findAll();/* productRepository.findAll(); */
     }
-
     @GetMapping("/products/filters")
     public List<Product> getByTypeAndMaxQuantity(@RequestParam Map<String, String> requestParams) throws Exception {
         String type = requestParams.get("type");
