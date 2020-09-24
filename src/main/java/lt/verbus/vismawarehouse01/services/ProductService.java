@@ -1,21 +1,13 @@
 package lt.verbus.vismawarehouse01.services;
 
-import lt.verbus.vismawarehouse01.exeption.ResourceNotFoundException;
+import lt.verbus.vismawarehouse01.exception.ResourceNotFoundException;
 import lt.verbus.vismawarehouse01.model.Product;
 import lt.verbus.vismawarehouse01.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service

@@ -1,7 +1,7 @@
 package lt.verbus.vismawarehouse01.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import lt.verbus.vismawarehouse01.exeption.ResourceNotFoundException;
+import lt.verbus.vismawarehouse01.exception.ResourceNotFoundException;
 import lt.verbus.vismawarehouse01.model.Product;
 import lt.verbus.vismawarehouse01.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +21,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    //1. Create products in system database
     @Operation(summary = "Adds new product")
     @PostMapping("/products")
     public Product createProduct(@Valid @RequestBody Product product) {
         return productService.saveToDatabase(product);
     }
 
-    //2. Update product info in system database
     @Operation(summary = "Updates existing product info")
     @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(
@@ -37,14 +35,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.updateProduct(productId, productDetails));
     }
 
-    //3. Remove product from system database
     @Operation(summary = "Removes product")
     @DeleteMapping("/products/{id}")
     public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productId) throws Exception {
         return productService.deleteProduct(productId);
     }
 
-    //4. Get deficit products
     @Operation(summary = "Returns products of specified type and not exceeding specified quantity) " +
             "(e.g. /products/of?type=dairy&max_quantity=3")
     @GetMapping("/products/of")
@@ -54,7 +50,6 @@ public class ProductController {
         return productService.findByTypeAndMaxQuantity(type, maxQuantity);
     }
 
-    //5. Get products about to expire
     @Operation(summary = "Returns all products expiring before specified date " +
             "(e.g. /products/expires_before?date=2020-11-11")
     @GetMapping("/products/expires_before")

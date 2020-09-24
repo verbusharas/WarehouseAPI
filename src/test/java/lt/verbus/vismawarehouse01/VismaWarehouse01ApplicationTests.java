@@ -54,7 +54,7 @@ class VismaWarehouse01ApplicationTests {
     @Test
     public void testCreateProduct() {
         Product product = new Product();
-        product.setType("Milk");
+        product.setType("dairy");
         product.setExpiryDate(LocalDate.now());
         product.setQuantity(2);
 
@@ -69,10 +69,10 @@ class VismaWarehouse01ApplicationTests {
         Product product = restTemplate.getForObject(getRootUrl() + "/product/" + id, Product.class);
         Assert.assertNotNull(product);
 
-        restTemplate.delete(getRootUrl() + "/users/" + id);
+        restTemplate.delete(getRootUrl() + "/products/" + id);
 
         try {
-            product = restTemplate.getForObject(getRootUrl() + "/users/" + id, Product.class);
+            product = restTemplate.getForObject(getRootUrl() + "/products/" + id, Product.class);
         } catch (final HttpClientErrorException e) {
             Assert.assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
         }

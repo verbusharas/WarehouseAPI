@@ -1,4 +1,4 @@
-package lt.verbus.vismawarehouse01.exeption;
+package lt.verbus.vismawarehouse01.exception;
 
 import java.util.Date;
 

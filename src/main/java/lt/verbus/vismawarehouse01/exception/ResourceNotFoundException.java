@@ -1,4 +1,4 @@
-package lt.verbus.vismawarehouse01.exeption;
+package lt.verbus.vismawarehouse01.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

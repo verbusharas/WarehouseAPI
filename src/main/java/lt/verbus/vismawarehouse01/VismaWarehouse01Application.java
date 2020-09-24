@@ -17,8 +17,10 @@ public class VismaWarehouse01Application {
     }
 
     @Bean
-    public OpenAPI customOpenAPI(@Value("${application-description}") String appDescription,
-                                 @Value("${application-version}") String appVersion) {
+    public OpenAPI customOpenAPI(@Value("${application-description}")
+                                         String appDescription,
+                                 @Value("${application-version}")
+                                         String appVersion) {
 
         Contact developerContact = new Contact();
         developerContact.setName("Šarūnas Verbus");
@@ -32,8 +34,7 @@ public class VismaWarehouse01Application {
                         .description(appDescription)
                         .contact(developerContact)
                         .termsOfService("http://swagger.io/terms")
-                .license(new License().name("Apache 2.0").url("http://springdoc.org")));
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")));
     }
-
 
 }
