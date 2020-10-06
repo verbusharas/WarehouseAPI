@@ -3,6 +3,7 @@ package lt.verbus.vismawarehouse01.services;
 import lt.verbus.vismawarehouse01.exception.ResourceNotFoundException;
 import lt.verbus.vismawarehouse01.model.Product;
 import lt.verbus.vismawarehouse01.repository.ProductRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
 
-    ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -23,23 +24,16 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product updateProduct(Long productId, Product productDetails) throws ResourceNotFoundException {
-        Product product =
-                productRepository
-                        .findById(productId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Project not found on :: " + productId));
-        product.setType(productDetails.getType());
-        product.setExpiryDate(productDetails.getExpiryDate());
-        product.setQuantity(productDetails.getQuantity());
-        return productRepository.save(product);
+    public Product updateProduct(Product productDetails) {
+        return productRepository.save(productDetails);
     }
 
-    public Map<String, Boolean> deleteProduct(Long productId) throws Exception {
-        Product product =
-                productRepository
-                        .findById(productId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Product not found on :: " + productId));
-        productRepository.delete(product);
+    public Map<String, Boolean> deleteProduct(Long productId) {
+        try {
+            productRepository.deleteById(productId);
+        } catch (EmptyResultDataAccessException e) {
+            // TODO: user friendly exception handling
+        }
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
@@ -48,7 +42,7 @@ public class ProductService {
     public List<Product> findByTypeAndMaxQuantity(String type, int maxQuantity) {
         return productRepository.findAll().stream()
                 .filter(p -> p.getType().equals(type))
-                .filter(p -> p.getQuantity() < maxQuantity)
+                .filter(p -> p.getQuantity() <= maxQuantity)
                 .collect(Collectors.toList());
     }
 
