@@ -15,56 +15,53 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
     @Operation(summary = "Adds new product")
-    @PostMapping("/products")
+    @PostMapping
     public Product createProduct(@Valid @RequestBody Product product) {
         return productService.saveToDatabase(product);
     }
 
     @Operation(summary = "Updates existing product info")
-    @PutMapping("/products/{id}")
-    public ResponseEntity<Product> updateProduct(
-            @PathVariable(value = "id") Long productId, @Valid @RequestBody Product productDetails)
-            throws ResourceNotFoundException {
-        return ResponseEntity.ok(productService.updateProduct(productId, productDetails));
+    @PutMapping
+    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product productDetails) {
+        return ResponseEntity.ok(productService.updateProduct(productDetails));
     }
 
     @Operation(summary = "Removes product")
-    @DeleteMapping("/products/{id}")
-    public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productId) throws Exception {
+    @DeleteMapping("/{id}")
+    public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productId) {
         return productService.deleteProduct(productId);
     }
 
     @Operation(summary = "Returns products of specified type and not exceeding specified quantity) " +
             "(e.g. /products/of?type=dairy&max_quantity=3")
-    @GetMapping("/products/of")
-    public List<Product> findByTypeAndMaxQuantity(@RequestParam Map<String, String> requestParams) {
-        String type = requestParams.get("type");
-        int maxQuantity = Integer.parseInt(requestParams.get("max_quantity"));
+    @GetMapping("/of")
+    public List<Product> findByTypeAndMaxQuantity(@RequestParam String type,  @RequestParam String max_quantity) {
+        int maxQuantity = Integer.parseInt(max_quantity);
         return productService.findByTypeAndMaxQuantity(type, maxQuantity);
     }
 
     @Operation(summary = "Returns all products expiring before specified date " +
             "(e.g. /products/expires_before?date=2020-11-11")
-    @GetMapping("/products/expires_before")
+    @GetMapping("/expires_before")
     public List<Product> findByExpiresBefore(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         return productService.findByExpiresBefore(date);
     }
 
     @Operation(summary = "Returns all products")
-    @GetMapping("/products")
+    @GetMapping
     public List<Product> getAllProducts() {
         return productService.findAll();
     }
 
     @Operation(summary = "Returns specified product")
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getProductsById(@PathVariable(value = "id") Long productId)
             throws ResourceNotFoundException {
         return ResponseEntity.ok().body(productService.findProductById(productId));
