@@ -38,7 +38,7 @@ class VismaWarehouse01ApplicationTests {
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
-        ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/users",
+        ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/products",
                 HttpMethod.GET, entity, String.class);
 
         Assert.assertNotNull(response.getBody());
@@ -66,7 +66,7 @@ class VismaWarehouse01ApplicationTests {
     @Test
     public void testDeletePost() {
         int id = 2;
-        Product product = restTemplate.getForObject(getRootUrl() + "/product/" + id, Product.class);
+        Product product = restTemplate.getForObject(getRootUrl() + "/products/" + id, Product.class);
         Assert.assertNotNull(product);
 
         restTemplate.delete(getRootUrl() + "/products/" + id);
@@ -74,7 +74,7 @@ class VismaWarehouse01ApplicationTests {
         try {
             product = restTemplate.getForObject(getRootUrl() + "/products/" + id, Product.class);
         } catch (final HttpClientErrorException e) {
-            Assert.assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
+            Assert.assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
         }
     }
 }
